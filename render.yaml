@@ -1,10 +1,8 @@
-services:
-  # A PostgreSQL database
-  - type: postgres # ✅ CORRECTED LINE
-    name: ems-database
-    plan: free 
+databases:
+  - name: ems-database
+    plan: free
 
-  # A web service running Gunicorn
+services:
   - type: web
     name: ems-flask-app
     env: python
