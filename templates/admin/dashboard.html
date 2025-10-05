@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Admin Dashboard</h1>
+    <hr>
+    
+    <h3>Companies</h3>
+    <a href="{{ url_for('add_company') }}" class="btn btn-success mb-3">Add New Company</a>
+    <table class="table table-striped">
+        <thead><tr><th>ID</th><th>Name</th><th>Address</th><th>Username</th></tr></thead>
+        <tbody>
+        {% for company in companies %}
+            <tr><td>{{ company.id }}</td><td>{{ company.name }}</td><td>{{ company.address }}</td><td>{{ company.user.username }}</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 class="mt-5">Vendors</h3>
+    <a href="{{ url_for('add_vendor') }}" class="btn btn-success mb-3">Add New Vendor</a>
+    <table class="table table-striped">
+        <thead><tr><th>ID</th><th>Name</th><th>Address</th><th>Username</th><th>Reputation Score</th></tr></thead>
+        <tbody>
+        {% for vendor in vendors %}
+            <tr><td>{{ vendor.id }}</td><td>{{ vendor.name }}</td><td>{{ vendor.address }}</td><td>{{ vendor.user.username }}</td><td><strong>{{ vendor.reputation_score }}</strong></td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+     <h3 class="mt-5">All Employees</h3>
+    <table class="table table-striped">
+        <thead><tr><th>Aadhar</th><th>Name</th><th>Mobile</th><th>Company</th><th>Vendor</th></tr></thead>
+        <tbody>
+        {% for emp in employees %}
+            <tr><td>{{ emp.aadhar_card }}</td><td>{{ emp.name }}</td><td>{{ emp.mobile_number }}</td><td>{{ emp.company.name }}</td><td>{{ emp.vendor.name if emp.vendor else 'Direct Hire' }}</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

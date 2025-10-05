@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ vendor.name }} - Vendor Dashboard</h1>
+    <p>Your Reputation Score: <strong>{{ vendor.reputation_score }}</strong></p>
+    <hr>
+    <h3>Employees Supplied by Us</h3>
+    <a href="{{ url_for('vendor_add_employee') }}" class="btn btn-primary mb-3">Add New Employee</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Aadhar</th>
+                <th>Name</th>
+                <th>Mobile Number</th>
+                <th>Job Type</th>
+                <th>Placed at Company</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees %}
+            <tr>
+                <td>{{ emp.aadhar_card }}</td>
+                <td>{{ emp.name }}</td>
+                <td>{{ emp.mobile_number }}</td>
+                <td>{{ emp.type_of_job }}</td>
+                <td>{{ emp.company.name }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">You have not supplied any employees yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Add New Employee for {{ current_user.company.name }}</h2>
+    <form method="POST" action="" novalidate>
+        {{ form.hidden_tag() }}
+        
+        <div class="mb-3">
+            {{ form.aadhar_card.label(class="form-label") }}
+            {{ form.aadhar_card(class="form-control", placeholder="12-digit Aadhar Number") }}
+             {% for error in form.aadhar_card.errors %}
+                <span class="text-danger">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="mb-3">
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.mobile_number.label(class="form-label") }}
+            {{ form.mobile_number(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.permanent_address.label(class="form-label") }}
+            {{ form.permanent_address(class="form-control", rows=3) }}
+        </div>
+        <div class="mb-3">
+            {{ form.present_address.label(class="form-label") }}
+            {{ form.present_address(class="form-control", rows=3) }}
+        </div>
+        <div class="mb-3">
+            {{ form.type_of_job.label(class="form-label") }}
+            {{ form.type_of_job(class="form-control", placeholder="e.g., Electrician, Plumber") }}
+        </div>
+        <div class="mb-3">
+            {{ form.vendor.label(class="form-label") }}
+            {{ form.vendor(class="form-select") }}
+            <div class="form-text">Select a vendor if this employee was hired through one.</div>
+        </div>
+        <hr>
+        <h5>Previous Job Details (Optional)</h5>
+        <div class="mb-3">
+            {{ form.previous_job.label(class="form-label") }}
+            {{ form.previous_job(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.duration.label(class="form-label") }}
+            {{ form.duration(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.previous_salary.label(class="form-label") }}
+            {{ form.previous_salary(class="form-control") }}
+        </div>
+        <hr>
+        
+        {{ form.company(style="display:none;") }}
+        
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+{% endblock %}
