@@ -1,0 +1,20 @@
+services:
+  # A PostgreSQL database
+  - type: psql
+    name: ems-database
+    plan: free # can be starter or standard
+
+  # A web service running Gunicorn
+  - type: web
+    name: ems-flask-app
+    env: python
+    plan: free # can be starter or standard
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ems-database
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true # Render will automatically generate a secure secret key
